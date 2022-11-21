@@ -3,6 +3,15 @@ import matplotlib.pyplot as plt
 import os
 import cv2
 import csv
+
+def list_of_list_to_list(temp):
+    flat_list = []
+    for inner_list in temp:
+        for item in inner_list:
+            flat_list.append(item)
+    return flat_list
+    
+
 data_directory = "../cmpsc445_final_project/cars_train" # path to the training dataset folder
 image_size = 200 # image size to convert all the images into 
 training_dataset = [] # all the images will be converted to array and will be appended to this list
@@ -14,11 +23,11 @@ label = open("../cmpsc445_final_project/train_labels.csv",'r')
 csv_reader1 = csv.reader(brand)
 csv_reader2 = csv.reader(label)
 
-brand = list(csv_reader1)
-label = list(csv_reader2)
+temp1 = list(csv_reader1)
+temp2 = list(csv_reader2)
 
-print(brand[:11], ":",label[:11])
-
+brand = list_of_list_to_list(temp1)
+label = list_of_list_to_list(temp2)
 
 for img in os.listdir(data_directory):
     # this for loop basically open each image in the folder and do the steps below and add it to training dataset[]
